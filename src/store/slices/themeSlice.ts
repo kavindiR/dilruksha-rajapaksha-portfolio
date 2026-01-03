@@ -5,19 +5,15 @@ interface ThemeState {
   mode: 'light' | 'dark';
 }
 
-// Load theme from localStorage or default to dark
+// Load theme from localStorage or default to light
 const getInitialTheme = (): 'light' | 'dark' => {
   if (typeof window !== 'undefined') {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light' || savedTheme === 'dark') {
       return savedTheme;
     }
-    // Check system preference
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-      return 'light';
-    }
   }
-  return 'dark';
+  return 'light';
 };
 
 const initialState: ThemeState = {
