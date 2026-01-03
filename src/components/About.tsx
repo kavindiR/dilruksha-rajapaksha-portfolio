@@ -18,30 +18,30 @@ export default function About() {
     <section
       id="about"
       ref={ref}
-      className="py-20 bg-black relative overflow-hidden"
+      className="py-12 bg-white relative overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-cyber-blue-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-cyber-blue-600/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#03045e]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#03045e]/5 rounded-full blur-3xl" />
       </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 text-glow-blue">
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-black">
             About Me
           </h2>
-          <div className="w-24 h-1.5 bg-gradient-to-r from-cyber-blue-500 to-cyber-blue-700 mx-auto rounded-full mb-8" />
-          <p className="text-lg md:text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+          <div className="w-32 h-1 bg-[#03045e] mx-auto rounded-full mb-6" />
+          <p className="text-lg md:text-xl text-black max-w-4xl mx-auto leading-relaxed">
             {personalInfo.summary}
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
           {highlights.map((item, index) => (
             <motion.div
               key={item.label}
@@ -50,12 +50,12 @@ export default function About() {
               transition={{ delay: index * 0.1, duration: 0.5 }}
               whileHover={{ scale: 1.05, y: -5 }}
             >
-              <div className="text-center bg-cyber-dark-500/60 backdrop-blur-cyber border border-cyber-blue-500/30 rounded-xl shadow-lg hover:shadow-cyber-blue-lg transition-all duration-300 p-6 border-t-4 border-cyber-blue-500">
-                <item.icon className="w-8 h-8 mx-auto mb-3 text-cyber-blue-500" />
-                <div className="text-3xl font-bold text-white mb-1">
+              <div className="text-center bg-white border border-[#03045e]/20 rounded-xl shadow-lg transition-all duration-300 p-6 border-t-4 border-[#03045e]">
+                <item.icon className="w-8 h-8 mx-auto mb-3 text-[#03045e]" />
+                <div className="text-3xl font-bold text-black mb-1">
                   {item.label}
                 </div>
-                <p className="text-sm text-gray-400">
+                <p className="text-sm text-black">
                   {item.subtitle}
                 </p>
               </div>
@@ -63,15 +63,15 @@ export default function About() {
           ))}
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-20">
+        <div className="grid md:grid-cols-2 gap-8 mb-12">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="bg-cyber-dark-500/60 backdrop-blur-cyber border border-cyber-blue-500/30 rounded-xl shadow-xl hover:shadow-cyber-blue-lg transition-all duration-300 p-6 border-t-4 border-cyber-blue-500">
-              <h3 className="flex items-center text-xl font-bold text-white mb-6">
-                <Code className="mr-3 text-cyber-blue-500" />
+            <div className="bg-white border border-[#03045e]/20 rounded-xl shadow-xl transition-all duration-300 p-6 border-t-4 border-[#03045e]">
+              <h3 className="font-display flex items-center text-xl font-bold text-black mb-6">
+                <Code className="mr-3 text-[#03045e]" />
                 Core Expertise
               </h3>
               <div className="space-y-4">
@@ -90,8 +90,8 @@ export default function About() {
                     transition={{ delay: 0.3 + index * 0.1 }}
                     className="flex items-center space-x-3"
                   >
-                    <span className="inline-block w-1.5 h-1.5 bg-cyber-blue-500 rounded-full" />
-                    <span className="text-gray-300">
+                    <span className="inline-block w-1.5 h-1.5 bg-[#03045e] rounded-full" />
+                    <span className="text-black">
                       {expertise}
                     </span>
                   </motion.div>
@@ -105,9 +105,9 @@ export default function About() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="bg-cyber-dark-500/60 backdrop-blur-cyber border border-cyber-blue-500/30 rounded-xl shadow-xl hover:shadow-cyber-blue-lg transition-all duration-300 p-6 border-t-4 border-cyber-blue-500">
-              <h3 className="flex items-center text-xl font-bold text-white mb-6">
-                <Award className="mr-3 text-cyber-blue-500" />
+            <div className="bg-white border border-[#03045e]/20 rounded-xl shadow-xl transition-all duration-300 p-6 border-t-4 border-[#03045e]">
+              <h3 className="font-display flex items-center text-xl font-bold text-black mb-6">
+                <Award className="mr-3 text-[#03045e]" />
                 Certifications
               </h3>
               <div className="space-y-4">
@@ -118,8 +118,8 @@ export default function About() {
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ delay: 0.3 + index * 0.1 }}
                   >
-                    <div className="bg-cyber-dark-500/80 backdrop-blur-cyber border border-cyber-blue-500/30 rounded-lg p-4 hover:border-cyber-blue-500/50 transition-colors">
-                      <p className="text-sm text-gray-300">
+                    <div className="bg-white border border-[#03045e]/20 rounded-lg p-4 hover:border-[#03045e]/40 transition-colors">
+                      <p className="text-sm text-black">
                         {cert}
                       </p>
                     </div>
@@ -141,14 +141,14 @@ export default function About() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 0.5 }}
-              className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-cyber-blue-500 to-cyber-blue-700 mb-4 shadow-cyber-blue"
+              className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#03045e] mb-4"
             >
               <BarChart className="text-white" size={32} />
             </motion.div>
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">
+            <h3 className="font-display text-3xl md:text-4xl font-bold text-black mb-2">
               Technical Skills
             </h3>
-            <p className="text-gray-300 text-sm md:text-base">
+            <p className="text-black text-sm md:text-base">
               Comprehensive expertise across modern data engineering stack
             </p>
           </div>
@@ -182,19 +182,16 @@ export default function About() {
                     whileHover={{ y: -5, scale: 1.02 }}
                     className="group"
                   >
-                    <div className="relative h-full bg-gradient-to-br from-cyber-dark-500/90 to-cyber-dark-500/70 backdrop-blur-cyber border border-cyber-blue-500/40 rounded-xl p-5 hover:border-cyber-blue-500/70 hover:shadow-cyber-blue-lg transition-all duration-300 overflow-hidden">
-                      {/* Gradient overlay on hover */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-cyber-blue-500/0 to-cyber-blue-700/0 group-hover:from-cyber-blue-500/5 group-hover:to-cyber-blue-700/5 transition-all duration-300 rounded-xl" />
-                      
+                    <div className="relative h-full bg-white border border-[#03045e]/20 rounded-xl p-5 hover:border-[#03045e]/40 transition-all duration-300 overflow-hidden">
                       {/* Category Header */}
-                      <div className="relative flex items-center space-x-3 mb-4 pb-4 border-b border-cyber-blue-500/30">
-                        <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-cyber-blue-500/20 to-cyber-blue-700/20 flex items-center justify-center group-hover:from-cyber-blue-500/30 group-hover:to-cyber-blue-700/30 transition-all duration-300">
-                          <Icon className="text-cyber-blue-500" size={20} />
+                      <div className="relative flex items-center space-x-3 mb-4 pb-4 border-b border-[#03045e]/20">
+                        <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#03045e]/10 flex items-center justify-center group-hover:bg-[#03045e]/20 transition-all duration-300">
+                          <Icon className="text-[#03045e]" size={20} />
                         </div>
-                        <h4 className="text-lg font-bold text-white leading-tight">
+                        <h4 className="font-display text-lg font-bold text-black leading-tight">
                           {category}
                         </h4>
-                        <div className="ml-auto px-2 py-0.5 rounded-full bg-cyber-blue-500/20 text-cyber-blue-400 text-xs font-semibold">
+                        <div className="ml-auto px-2 py-0.5 rounded-full bg-[#03045e]/10 text-[#03045e] text-xs font-semibold">
                           {techs.length}
                         </div>
                       </div>
@@ -214,7 +211,7 @@ export default function About() {
                             whileHover={{ scale: 1.1, y: -2 }}
                             className="inline-flex items-center"
                           >
-                            <span className="px-3 py-1.5 bg-cyber-dark-500/60 backdrop-blur-sm border border-cyber-blue-500/40 text-gray-200 rounded-lg text-xs font-medium shadow-sm hover:bg-cyber-blue-500/10 hover:border-cyber-blue-500/60 transition-all duration-200">
+                            <span className="px-3 py-1.5 bg-white border border-[#03045e]/20 text-black rounded-lg text-xs font-medium shadow-sm hover:bg-[#03045e] hover:text-white hover:border-[#03045e] transition-all duration-200">
                               {tech}
                             </span>
                           </motion.span>

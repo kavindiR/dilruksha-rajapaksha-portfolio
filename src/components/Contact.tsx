@@ -33,31 +33,31 @@ export default function Contact() {
     <section
       id="contact"
       ref={ref}
-      className="py-20 bg-black relative overflow-hidden"
+      className="py-12 bg-white relative overflow-hidden"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-cyber-blue-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-cyber-blue-600/5 rounded-full blur-3xl" />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#03045e]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#03045e]/5 rounded-full blur-3xl" />
       </div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-white mb-6 text-glow-blue">
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-black">
             Get In Touch
           </h2>
-          <div className="w-24 h-1.5 bg-gradient-to-r from-cyber-blue-500 to-cyber-blue-700 mx-auto rounded-full mb-8" />
-          <p className="text-lg md:text-xl text-gray-300 text-gray-300 max-w-3xl mx-auto">
+          <div className="w-32 h-1 bg-[#03045e] mx-auto rounded-full mb-6" />
+          <p className="text-lg md:text-xl text-black max-w-3xl mx-auto">
             I'm always open to discussing new opportunities, collaborations, or innovative data engineering projects.
           </p>
         </motion.div>
 
         <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8 mb-16">
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
             {contactMethods.map((method, index) => (
               <motion.a
                 key={method.label}
@@ -70,21 +70,21 @@ export default function Contact() {
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <div className="group relative bg-cyber-dark-500/60 bg-cyber-dark-500/60 backdrop-blur-cyber border border-cyber-blue-500/30 border-cyber-blue-500/30 border-cyber-blue-500/20 rounded-xl shadow-lg hover:shadow-cyber-blue-lg transition-all duration-300 overflow-hidden border-t-4 border-cyber-blue-500 p-6">
+                <div className="group relative bg-white border border-[#03045e]/20 rounded-xl shadow-lg transition-all duration-300 overflow-hidden border-t-4 border-[#03045e] p-6">
                   <div className="flex flex-col items-center text-center">
                     <motion.div
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.6 }}
-                      className="w-16 h-16 bg-gradient-to-br from-cyber-blue-500 to-cyber-blue-700 rounded-full flex items-center justify-center text-white mb-4 shadow-cyber-blue group-hover:shadow-cyber-blue-lg"
+                      className="w-16 h-16 bg-[#03045e] rounded-full flex items-center justify-center text-white mb-4"
                     >
                       <method.icon size={28} />
                     </motion.div>
 
-                    <h3 className="text-lg font-bold text-white text-white mb-2">
+                    <h3 className="font-display text-lg font-bold text-black mb-2">
                       {method.label}
                     </h3>
 
-                    <p className="text-sm text-gray-300 text-gray-300 break-all">
+                    <p className="text-sm text-black break-all">
                       {method.value}
                     </p>
                   </div>
@@ -98,21 +98,21 @@ export default function Contact() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="bg-gradient-to-br from-cyber-blue-500 to-cyber-blue-700 text-white border border-cyber-blue-500/50 rounded-xl shadow-cyber-blue-lg p-8">
+            <div className="bg-[#03045e] text-white border border-[#03045e] rounded-xl p-8">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={isInView ? { scale: 1 } : {}}
                 transition={{ delay: 0.6, type: 'spring', stiffness: 200 }}
-                className="w-20 h-20 mx-auto mb-6 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center shadow-cyber-blue"
+                className="w-20 h-20 mx-auto mb-6 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center"
               >
                 <Send size={40} />
               </motion.div>
 
-              <h3 className="text-3xl mb-4 text-center text-white font-bold">
+              <h3 className="font-display text-3xl mb-4 text-center text-white font-bold">
                 Ready to Start a Conversation?
               </h3>
 
-              <p className="text-blue-100 mb-8 max-w-2xl mx-auto text-center">
+              <p className="text-white/90 mb-8 max-w-2xl mx-auto text-center">
                 Whether you have a project in mind, need consultation on data engineering solutions,
                 or just want to connect, I'd love to hear from you.
               </p>
@@ -121,7 +121,7 @@ export default function Contact() {
                   size="lg"
                   variant="secondary"
                   onClick={() => window.location.href = `mailto:${personalInfo.email}`}
-                  className="bg-white text-cyber-blue-600 hover:bg-white/90 shadow-lg"
+                  className="bg-white text-[#03045e] hover:bg-white/90 shadow-lg"
                 >
                   <Mail size={20} className="mr-2" />
                   Send Me an Email

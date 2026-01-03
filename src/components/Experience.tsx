@@ -11,28 +11,28 @@ export default function Experience() {
     <section
       id="experience"
       ref={ref}
-      className="py-20 bg-black relative"
+      className="py-12 bg-white relative"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-white mb-6 text-glow-blue">
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-black">
             Professional Experience
           </h2>
-          <div className="w-24 h-1.5 bg-gradient-to-r from-cyber-blue-500 to-cyber-blue-700 mx-auto rounded-full mb-8" />
-          <p className="text-lg md:text-xl text-gray-300 text-gray-300 ">
+          <div className="w-32 h-1 bg-[#03045e] mx-auto rounded-full mb-6" />
+          <p className="text-lg md:text-xl text-black">
             6+ years of delivering innovative data solutions
           </p>
         </motion.div>
 
         <div className="relative">
-          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-cyber-blue-500 to-cyber-blue-700" />
+          <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-[#03045e]" />
 
-          <div className="space-y-12">
+          <div className="space-y-10">
             {experiences.map((exp, index) => (
               <motion.div
                 key={exp.id}
@@ -43,7 +43,7 @@ export default function Experience() {
                   index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                 }`}
               >
-                <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-gradient-to-br from-cyber-blue-500 to-cyber-blue-700 rounded-full items-center justify-center z-10 shadow-cyber-blue">
+                <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-[#03045e] rounded-full items-center justify-center z-10">
                   <Briefcase className="text-white" size={20} />
                 </div>
 
@@ -53,26 +53,26 @@ export default function Experience() {
                     index % 2 === 0 ? 'md:text-right md:pr-12' : 'md:pl-12'
                   }`}
                 >
-                  <div className="bg-cyber-dark-500/60 bg-cyber-dark-500/60 backdrop-blur-cyber border border-cyber-blue-500/30 border-cyber-blue-500/30 border-cyber-blue-500/20 rounded-xl shadow-xl hover:shadow-cyber-blue-lg transition-all duration-300 p-6 border-t-4 border-cyber-blue-500">
+                  <div className="bg-white border border-[#03045e]/20 rounded-xl shadow-xl transition-all duration-300 p-6 border-t-4 border-[#03045e]">
                     <div className="flex md:hidden items-center space-x-2 mb-4">
-                      <div className="w-10 h-10 bg-gradient-to-br from-cyber-blue-500 to-cyber-blue-700 rounded-full flex items-center justify-center">
+                      <div className="w-10 h-10 bg-[#03045e] rounded-full flex items-center justify-center">
                         <Briefcase className="text-white" size={16} />
                       </div>
                       <div className="flex-1">
-                        <span className="inline-block px-3 py-1 bg-cyber-blue-500/20 text-cyber-blue-500 border border-cyber-blue-500/30 rounded-full text-xs font-medium">
+                        <span className="inline-block px-3 py-1 bg-[#03045e]/10 text-[#03045e] border border-[#03045e]/20 rounded-full text-xs font-medium">
                           {exp.type}
                         </span>
                       </div>
                     </div>
 
-                    <h3 className="text-2xl font-bold text-white text-white mb-2">
+                    <h3 className="font-display text-2xl font-bold text-black mb-2">
                       {exp.title}
                     </h3>
-                    <h4 className="text-xl font-semibold text-cyber-blue-500 mb-3">
+                    <h4 className="font-display text-xl font-semibold text-[#03045e] mb-3">
                       {exp.company}
                     </h4>
 
-                    <div className="flex flex-wrap gap-3 mb-4 text-sm text-gray-300 text-gray-300 ">
+                    <div className="flex flex-wrap gap-3 mb-4 text-sm text-black">
                       <div className="flex items-center space-x-1">
                         <MapPin size={16} />
                         <span>{exp.location}</span>
@@ -89,23 +89,23 @@ export default function Experience() {
 
                     {exp.domain && (
                       <div className="mb-4">
-                        <span className="inline-block px-3 py-1 bg-cyber-blue-500/20 text-cyber-blue-500 border border-cyber-blue-500/30 rounded-full text-sm font-medium">
+                        <span className="inline-block px-3 py-1 bg-[#03045e]/10 text-[#03045e] border border-[#03045e]/20 rounded-full text-sm font-medium">
                           {exp.domain}
                         </span>
                       </div>
                     )}
 
                     <div className="mb-4">
-                      <h5 className="font-semibold text-white text-white mb-2">
+                      <h5 className="font-display font-semibold text-black mb-2">
                         Key Responsibilities:
                       </h5>
                       <ul className="space-y-2">
                         {exp.responsibilities.slice(0, 3).map((resp, idx) => (
                           <li
                             key={idx}
-                            className="text-sm text-gray-300 text-gray-300 flex items-start"
+                            className="text-sm text-black flex items-start"
                           >
-                            <span className="inline-block w-1.5 h-1.5 bg-cyber-blue-500 rounded-full mt-2 mr-2 flex-shrink-0" />
+                            <span className="inline-block w-1.5 h-1.5 bg-[#03045e] rounded-full mt-2 mr-2 flex-shrink-0" />
                             <span>{resp}</span>
                           </li>
                         ))}
@@ -113,7 +113,7 @@ export default function Experience() {
                     </div>
 
                     <div>
-                      <h5 className="font-semibold text-white text-white mb-2">
+                      <h5 className="font-display font-semibold text-black mb-2">
                         Technologies:
                       </h5>
                       <div className="flex flex-wrap gap-2">
@@ -121,13 +121,13 @@ export default function Experience() {
                           <motion.span
                             key={idx}
                             whileHover={{ scale: 1.1 }}
-                            className="px-2 py-1 bg-cyber-dark-500/80 bg-cyber-dark-500/80 backdrop-blur-cyber border border-cyber-blue-500/30 border-cyber-blue-500/30 border-cyber-blue-500/20 text-gray-200 text-gray-200 text-gray-700 rounded text-xs font-medium"
+                            className="px-2 py-1 bg-white border border-[#03045e]/20 text-black rounded text-xs font-medium hover:bg-[#03045e] hover:text-white transition-colors"
                           >
                             {tech}
                           </motion.span>
                         ))}
                         {exp.technologies.length > 6 && (
-                          <span className="px-2 py-1 bg-cyber-dark-500/80 bg-cyber-dark-500/80 backdrop-blur-cyber border border-cyber-blue-500/30 border-cyber-blue-500/30 border-cyber-blue-500/20 text-gray-200 text-gray-200 text-gray-700 rounded text-xs font-medium">
+                          <span className="px-2 py-1 bg-white border border-[#03045e]/20 text-black rounded text-xs font-medium hover:bg-[#03045e] hover:text-white transition-colors">
                             +{exp.technologies.length - 6} more
                           </span>
                         )}

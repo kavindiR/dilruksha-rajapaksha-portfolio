@@ -12,20 +12,20 @@ export default function Projects() {
     <section
       id="projects"
       ref={ref}
-      className="py-20 bg-black relative"
+      className="py-12 bg-white relative"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-20"
+          className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-white text-gray-900 mb-6 text-glow-blue">
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-black">
             Featured Projects
           </h2>
-          <div className="w-24 h-1.5 bg-gradient-to-r from-cyber-blue-500 to-cyber-blue-700 mx-auto rounded-full mb-8" />
-          <p className="text-lg md:text-xl text-gray-300 text-gray-300 text-gray-600">
+          <div className="w-32 h-1 bg-[#03045e] mx-auto rounded-full mb-6" />
+          <p className="text-lg md:text-xl text-black">
             Innovative solutions across various domains
           </p>
         </motion.div>
@@ -40,9 +40,9 @@ export default function Projects() {
               whileHover={{ y: -10 }}
               onMouseEnter={() => setSelectedProject(project.id)}
               onMouseLeave={() => setSelectedProject(null)}
-              className="group relative bg-cyber-dark-500/60 bg-cyber-dark-500/60 backdrop-blur-cyber border border-cyber-blue-500/30 border-cyber-blue-500/30 border-cyber-blue-500/20 rounded-xl shadow-lg hover:shadow-cyber-blue-lg transition-all duration-300 overflow-hidden"
+              className="group relative bg-white border border-[#03045e]/20 rounded-xl shadow-lg transition-all duration-300 overflow-hidden"
             >
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyber-blue-500 to-cyber-blue-700" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-[#03045e]" />
 
               <div className="p-6">
                 <div className="flex items-start justify-between mb-4">
@@ -51,27 +51,27 @@ export default function Projects() {
                       rotate: selectedProject === project.id ? 15 : 0,
                     }}
                     transition={{ duration: 0.3 }}
-                    className="w-12 h-12 bg-gradient-to-br from-cyber-blue-500 to-cyber-blue-700 rounded-lg flex items-center justify-center text-white shadow-cyber-blue"
+                    className="w-12 h-12 bg-[#03045e] rounded-lg flex items-center justify-center text-white"
                   >
                     <Folder size={24} />
                   </motion.div>
-                  <span className="px-3 py-1 bg-cyber-blue-500/20 text-cyber-blue-500 border border-cyber-blue-500/30 rounded-full text-xs font-medium">
+                  <span className="px-3 py-1 bg-[#03045e]/10 text-[#03045e] border border-[#03045e]/20 rounded-full text-xs font-medium">
                     {project.domain}
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyber-blue-500 transition-colors">
+                <h3 className="font-display text-xl font-bold text-black mb-3 group-hover:text-[#03045e] transition-colors">
                   {project.title}
                 </h3>
 
-                <p className="text-gray-300 text-gray-300 text-sm mb-4 line-clamp-3">
+                <p className="text-black text-sm mb-4 line-clamp-3">
                   {project.description}
                 </p>
 
                 <div className="mb-4">
                   <div className="flex items-center space-x-2 mb-2">
-                    <Tag size={16} className="text-cyber-blue-500" />
-                    <span className="text-sm font-semibold text-white text-white ">
+                    <Tag size={16} className="text-[#03045e]" />
+                    <span className="text-sm font-semibold text-black">
                       Technologies:
                     </span>
                   </div>
@@ -80,23 +80,23 @@ export default function Projects() {
                       <motion.span
                         key={idx}
                         whileHover={{ scale: 1.1 }}
-                        className="px-2 py-1 bg-cyber-dark-500/80 bg-cyber-dark-500/80 backdrop-blur-cyber border border-cyber-blue-500/30 border-cyber-blue-500/30 border-cyber-blue-500/20 text-gray-200 text-gray-200 text-gray-700 rounded text-xs font-medium shadow-sm"
+                        className="px-2 py-1 bg-white border border-[#03045e]/20 text-black rounded text-xs font-medium shadow-sm hover:bg-[#03045e] hover:text-white transition-colors"
                       >
                         {tech}
                       </motion.span>
                     ))}
                     {project.technologies.length > 4 && (
-                      <span className="px-2 py-1 bg-cyber-dark-500/80 backdrop-blur-cyber border border-cyber-blue-500/30 text-gray-200 rounded text-xs font-medium shadow-sm">
+                      <span className="px-2 py-1 bg-white border border-[#03045e]/20 text-black rounded text-xs font-medium shadow-sm hover:bg-[#03045e] hover:text-white transition-colors">
                         +{project.technologies.length - 4}
                       </span>
                     )}
                   </div>
                 </div>
 
-                <div className="border-t border-cyber-blue-500/30 border-cyber-blue-500/30 border-cyber-blue-500/20 pt-4">
+                <div className="border-t border-[#03045e]/20 pt-4">
                   <div className="flex items-center space-x-2 mb-2">
-                    <CheckCircle size={16} className="text-cyber-blue-500" />
-                    <span className="text-sm font-semibold text-white text-white ">
+                    <CheckCircle size={16} className="text-[#03045e]" />
+                    <span className="text-sm font-semibold text-black">
                       Key Achievements:
                     </span>
                   </div>
@@ -104,9 +104,9 @@ export default function Projects() {
                     {project.highlights.map((highlight, idx) => (
                       <li
                         key={idx}
-                        className="text-xs text-gray-300 text-gray-300 text-gray-600 flex items-start"
+                        className="text-xs text-black flex items-start"
                       >
-                        <span className="inline-block w-1 h-1 bg-cyber-blue-500 rounded-full mt-1.5 mr-2 flex-shrink-0" />
+                        <span className="inline-block w-1 h-1 bg-[#03045e] rounded-full mt-1.5 mr-2 flex-shrink-0" />
                         <span>{highlight}</span>
                       </li>
                     ))}
@@ -120,7 +120,7 @@ export default function Projects() {
                   scaleX: selectedProject === project.id ? 1 : 0,
                 }}
                 transition={{ duration: 0.3 }}
-                className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-cyber-blue-500 to-cyber-blue-700 origin-left"
+                className="absolute bottom-0 left-0 right-0 h-1 bg-[#03045e] origin-left"
               />
             </motion.div>
           ))}

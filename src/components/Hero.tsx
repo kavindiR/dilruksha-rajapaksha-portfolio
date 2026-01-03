@@ -1,6 +1,5 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useMemo } from 'react';
-import { ArrowDown } from 'lucide-react';
 import { personalInfo, education } from '../data/portfolio';
 import profileImage from '../assets/Dilruksha.png';
 
@@ -329,11 +328,6 @@ export default function Hero() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.querySelector(sectionId);
-    element?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   // Get education data for display
   const mscDegree = education.find(edu => edu.degree.includes('Data Science & Artificial Intelligence'));
   const bscDegree = education.find(edu => edu.degree.includes('Statistics & Operations Research'));
@@ -342,7 +336,7 @@ export default function Hero() {
     <section
       id="home"
       ref={ref}
-      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-white"
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-screen py-12">
@@ -357,7 +351,7 @@ export default function Hero() {
               <img
                 src={profileImage}
                 alt={personalInfo.name}
-                className="w-full h-auto object-contain"
+                className="w-full h-auto object-contain relative z-10"
               />
             </div>
           </motion.div>
@@ -367,7 +361,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-white space-y-6 lg:space-y-8"
+            className="text-black space-y-6 lg:space-y-8"
           >
             {/* Professional Title */}
             <motion.div
@@ -376,10 +370,10 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="space-y-2"
             >
-              <p className="text-lg md:text-xl lg:text-2xl font-semibold text-cyber-blue-400 uppercase tracking-wider">
+              <p className="text-lg md:text-xl lg:text-2xl font-semibold text-[#03045e] uppercase tracking-wider">
                 Data Engineering Consultant
               </p>
-              <div className="w-24 h-1 bg-gradient-to-r from-cyber-blue-500 to-cyber-blue-700 rounded-full" />
+              <div className="w-24 h-1 bg-[#03045e] rounded-full" />
             </motion.div>
 
             {/* Name */}
@@ -388,7 +382,7 @@ export default function Hero() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight leading-none text-glow-blue-sm">
+              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight leading-none text-black">
                 DILRUKSHA RAJAPAKSHA
               </h1>
             </motion.div>
@@ -402,9 +396,9 @@ export default function Hero() {
             >
               <p className="text-xl md:text-2xl lg:text-3xl font-semibold leading-tight">
                 Transforming Data into
-                <span className="block text-cyber-blue-400"> Strategic Business Value</span>
+                <span className="block text-[#03045e]"> Strategic Business Value</span>
               </p>
-              <p className="text-base md:text-lg text-gray-300 leading-relaxed max-w-2xl">
+              <p className="text-base md:text-lg text-black leading-relaxed max-w-2xl">
                 6+ years of expertise in architecting scalable data solutions, optimizing data pipelines, 
                 and enabling data-driven decision making across cloud platforms.
               </p>
@@ -417,42 +411,25 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.8 }}
               className="pt-4"
             >
-              <div className="inline-flex items-center space-x-4 px-6 py-3 bg-cyber-dark-500/60 backdrop-blur-sm border border-cyber-blue-500/30 rounded-lg shadow-lg">
+              <div className="inline-flex items-center space-x-4 px-6 py-3 bg-white border border-[#03045e]/20 rounded-lg shadow-lg">
                 <div className="flex items-center space-x-2">
-                  <span className="text-xs font-semibold text-cyber-blue-400 uppercase tracking-wider">
+                  <span className="text-xs font-semibold text-[#03045e] uppercase tracking-wider">
                     Certified
                   </span>
                 </div>
-                <div className="h-4 w-px bg-cyber-blue-500/50" />
+                <div className="h-4 w-px bg-[#03045e]/30" />
                 <div className="flex items-center space-x-3 text-sm">
-                  <span className="text-gray-300">Microsoft</span>
-                  <span className="text-gray-300">•</span>
-                  <span className="text-gray-300">AWS</span>
-                  <span className="text-gray-300">•</span>
-                  <span className="text-gray-300">Databricks</span>
+                  <span className="text-black">Microsoft</span>
+                  <span className="text-black">•</span>
+                  <span className="text-black">AWS</span>
+                  <span className="text-black">•</span>
+                  <span className="text-black">Databricks</span>
                 </div>
               </div>
             </motion.div>
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.6, delay: 1 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.button
-            onClick={() => scrollToSection('#about')}
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center space-y-2 text-white hover:text-gray-300 transition-colors"
-          >
-            <span className="text-sm font-medium">Scroll Down</span>
-            <ArrowDown className="w-6 h-6" />
-          </motion.button>
-        </motion.div>
       </div>
     </section>
   );
