@@ -180,7 +180,7 @@ export default function Footer() {
       whileInView="visible"
       viewport={{ once: true, margin: '-50px' }}
       variants={containerVariants}
-      className="relative bg-black text-white border-t border-cyber-blue-500/30"
+      className="relative bg-white text-black border-t border-[#03045e]/10"
     >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -198,7 +198,7 @@ export default function Footer() {
           viewport={{ once: true }}
           whileHover="hover"
           whileTap="tap"
-          className="relative w-14 h-14 bg-gradient-to-br from-cyber-blue-500 to-cyber-blue-700 rounded-full shadow-cyber-blue hover:shadow-cyber-blue-lg transition-all duration-300 flex items-center justify-center text-white z-20 border-4 border-black"
+          className="relative w-14 h-14 bg-gradient-to-br from-cyber-blue-500 to-cyber-blue-700 rounded-full transition-all duration-300 flex items-center justify-center text-white z-20 border-4 border-white"
           aria-label="Scroll to top"
         >
           <motion.div
@@ -224,20 +224,20 @@ export default function Footer() {
           >
             <div className="mb-4">
               <motion.h3
-                className="text-2xl font-bold bg-gradient-to-r from-cyber-blue-500 via-cyber-blue-400 to-cyber-blue-600 bg-clip-text text-transparent text-glow-blue-sm mb-2"
+                className="font-display text-2xl font-bold text-[#03045e] mb-2"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
                 {personalInfo.name.split(' ')[0]}
               </motion.h3>
-              <h4 className="text-xl font-semibold text-white">
+              <h4 className="font-display text-xl font-semibold text-black">
                 {personalInfo.name.split(' ')[1]}
               </h4>
             </div>
-            <p className="text-gray-400 text-sm mb-4 leading-relaxed">
+            <p className="text-black text-sm mb-4 leading-relaxed">
               {personalInfo.title}
             </p>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <p className="text-black text-sm leading-relaxed">
               Transforming data into strategic business value through innovative engineering solutions.
             </p>
           </motion.div>
@@ -247,8 +247,8 @@ export default function Footer() {
             variants={itemVariants}
             className="w-full"
           >
-            <h5 className="text-lg font-semibold text-white mb-4 flex items-center">
-              <Code className="mr-2 text-cyber-blue-500" size={20} />
+            <h5 className="font-display text-lg font-semibold text-black mb-4 flex items-center">
+              <Code className="mr-2 text-[#03045e]" size={20} />
               Quick Links
             </h5>
             <nav className="flex flex-col space-y-2">
@@ -263,7 +263,7 @@ export default function Footer() {
                     e.preventDefault();
                     handleNavClick(item.href);
                   }}
-                  className="text-gray-400 hover:text-cyber-blue-500 transition-colors duration-300 text-sm font-medium"
+                  className="text-black hover:text-[#03045e] transition-colors duration-300 text-sm font-medium"
                 >
                   {item.name}
                 </motion.a>
@@ -276,8 +276,8 @@ export default function Footer() {
             variants={itemVariants}
             className="w-full"
           >
-            <h5 className="text-lg font-semibold text-white mb-4 flex items-center">
-              <Briefcase className="mr-2 text-cyber-blue-500" size={20} />
+            <h5 className="font-display text-lg font-semibold text-black mb-4 flex items-center">
+              <Briefcase className="mr-2 text-[#03045e]" size={20} />
               Expertise
             </h5>
             <ul className="flex flex-col space-y-2">
@@ -293,11 +293,11 @@ export default function Footer() {
                   key={expertise}
                   variants={expertiseItemVariants}
                   custom={index}
-                  className="text-gray-400 text-sm flex items-center"
+                  className="text-black text-sm flex items-center"
                   whileHover={{ x: 5 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                 >
-                  <span className="w-1.5 h-1.5 bg-cyber-blue-500 rounded-full mr-2" />
+                  <span className="w-1.5 h-1.5 bg-[#03045e] rounded-full mr-2" />
                   {expertise}
                 </motion.li>
               ))}
@@ -309,8 +309,8 @@ export default function Footer() {
             variants={itemVariants}
             className="w-full"
           >
-            <h5 className="text-lg font-semibold text-white mb-4 flex items-center">
-              <Database className="mr-2 text-cyber-blue-500" size={20} />
+            <h5 className="font-display text-lg font-semibold text-black mb-4 flex items-center">
+              <Database className="mr-2 text-[#03045e]" size={20} />
               Get In Touch
             </h5>
             <div className="space-y-3">
@@ -319,9 +319,9 @@ export default function Footer() {
                 variants={contactItemVariants}
                 custom={0}
                 whileHover="hover"
-                className="flex items-center space-x-3 text-gray-400 hover:text-cyber-blue-500 transition-colors duration-300 text-sm group"
+                className="flex items-center space-x-3 text-black hover:text-[#03045e] transition-colors duration-300 text-sm group"
               >
-                <Mail size={16} className="text-cyber-blue-500 group-hover:scale-110 transition-transform" />
+                <Mail size={16} className="text-[#03045e] group-hover:scale-110 transition-transform" />
                 <span className="break-all">{personalInfo.email}</span>
               </motion.a>
               <motion.a
@@ -329,9 +329,9 @@ export default function Footer() {
                 variants={contactItemVariants}
                 custom={1}
                 whileHover="hover"
-                className="flex items-center space-x-3 text-gray-400 hover:text-cyber-blue-500 transition-colors duration-300 text-sm group"
+                className="flex items-center space-x-3 text-black hover:text-[#03045e] transition-colors duration-300 text-sm group"
               >
-                <Phone size={16} className="text-cyber-blue-500 group-hover:scale-110 transition-transform" />
+                <Phone size={16} className="text-[#03045e] group-hover:scale-110 transition-transform" />
                 <span>{personalInfo.phone}</span>
               </motion.a>
               <motion.a
@@ -341,15 +341,15 @@ export default function Footer() {
                 variants={contactItemVariants}
                 custom={2}
                 whileHover="hover"
-                className="flex items-center space-x-3 text-gray-400 hover:text-cyber-blue-500 transition-colors duration-300 text-sm group"
+                className="flex items-center space-x-3 text-black hover:text-[#03045e] transition-colors duration-300 text-sm group"
               >
-                <Linkedin size={16} className="text-cyber-blue-500 group-hover:scale-110 transition-transform" />
+                <Linkedin size={16} className="text-[#03045e] group-hover:scale-110 transition-transform" />
                 <span>LinkedIn Profile</span>
               </motion.a>
             </div>
 
             {/* Social Icons */}
-            <div className="flex items-center space-x-3 mt-6 pt-6 border-t border-cyber-blue-500/20 w-full">
+            <div className="flex items-center space-x-3 mt-6 pt-6 border-t border-[#03045e]/20 w-full">
               {[
                 { icon: Mail, href: `mailto:${personalInfo.email}`, label: 'Email' },
                 { icon: Linkedin, href: `https://${personalInfo.linkedin}`, label: 'LinkedIn' },
@@ -364,7 +364,7 @@ export default function Footer() {
                   custom={index}
                   whileHover="hover"
                   whileTap="tap"
-                  className="w-10 h-10 bg-cyber-dark-500/60 backdrop-blur-cyber border border-cyber-blue-500/30 rounded-lg flex items-center justify-center text-cyber-blue-500 hover:bg-cyber-blue-500/10 hover:border-cyber-blue-500 transition-all duration-300 shadow-sm"
+                  className="w-10 h-10 bg-white border border-[#03045e]/20 rounded-lg flex items-center justify-center text-[#03045e] hover:bg-[#03045e] hover:text-white transition-all duration-300 shadow-sm"
                   aria-label={social.label}
                 >
                   <social.icon size={18} />
@@ -377,22 +377,22 @@ export default function Footer() {
         {/* Bottom Bar */}
         <motion.div
           variants={bottomBarVariants}
-          className="pt-8 border-t border-cyber-blue-500/20"
+          className="pt-8 border-t border-[#03045e]/20"
         >
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
             <motion.div
-              className="text-gray-400 text-sm"
+              className="text-black text-sm"
               whileHover={{ opacity: 0.8 }}
               transition={{ duration: 0.2 }}
             >
               © {new Date().getFullYear()} {personalInfo.name}. All rights reserved.
             </motion.div>
             <motion.div
-              className="text-gray-400 text-sm"
+              className="text-black text-sm"
               whileHover={{ scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 400, damping: 17 }}
             >
-              <span>Build by kavindi rajapaksha</span>
+              <span>Designed & Developed by Kavindi Rajapaksha</span>
             </motion.div>
           </div>
         </motion.div>

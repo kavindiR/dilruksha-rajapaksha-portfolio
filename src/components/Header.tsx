@@ -163,7 +163,7 @@ export default function Header() {
       animate="visible"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-cyber-dark-500/90 backdrop-blur-cyber shadow-lg border-b border-cyber-blue-500/30'
+          ? 'bg-white shadow-lg border-b border-[#03045e]/20'
           : 'bg-transparent'
       }`}
     >
@@ -181,12 +181,16 @@ export default function Header() {
                 e.preventDefault();
                 handleNavClick('#home');
               }}
-              className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-cyber-blue-500 to-cyber-blue-600 bg-clip-text text-transparent text-glow-blue-sm"
+              className="flex items-center"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: 'spring', stiffness: 400, damping: 17 }}
             >
-              DR
+              <img 
+                src="/favicon.svg" 
+                alt="DR Logo" 
+                className="h-8 w-8 sm:h-10 sm:w-10"
+              />
             </motion.a>
           </motion.div>
 
@@ -204,11 +208,11 @@ export default function Header() {
                   e.preventDefault();
                   handleNavClick(item.href);
                 }}
-                className="text-gray-300 hover:text-cyber-blue-500 transition-colors duration-300 font-medium relative"
+                className="text-black hover:text-[#03045e] transition-colors duration-300 font-medium relative"
               >
                 {item.name}
                 <motion.span
-                  className="absolute bottom-0 left-0 w-0 h-0.5 bg-cyber-blue-500"
+                  className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#03045e]"
                   whileHover={{ width: '100%' }}
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 />
@@ -225,7 +229,7 @@ export default function Header() {
               animate="visible"
               whileHover="hover"
               whileTap="tap"
-              className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-cyber-blue-500 to-cyber-blue-600 text-white border border-cyber-blue-500/50 hover:from-cyber-blue-400 hover:to-cyber-blue-500 hover:shadow-cyber-blue-sm transition-all duration-300 font-medium"
+              className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-[#03045e] text-white border border-[#03045e] hover:bg-[#03045e]/90 transition-all duration-300 font-medium"
             >
               <Download size={18} />
               <span>Download CV</span>
@@ -238,7 +242,7 @@ export default function Header() {
               whileHover="hover"
               whileTap="tap"
               onClick={() => dispatch(toggleMenu())}
-              className="md:hidden p-2 rounded-lg bg-cyber-dark-500/80 backdrop-blur-cyber text-cyber-blue-500 border border-cyber-blue-500/30"
+              className="md:hidden p-2 rounded-lg bg-white text-[#03045e] border border-[#03045e]/20"
             >
               <AnimatePresence mode="wait">
                 {isMenuOpen ? (
@@ -289,7 +293,7 @@ export default function Header() {
                       e.preventDefault();
                       handleNavClick(item.href);
                     }}
-                    className="text-gray-300 hover:text-cyber-blue-500 transition-colors duration-300 font-medium py-2"
+                    className="text-black hover:text-[#03045e] transition-colors duration-300 font-medium py-2"
                     whileHover={{ x: 5 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -303,7 +307,7 @@ export default function Header() {
                   initial="hidden"
                   animate="visible"
                   custom={navItems.length}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-cyber-blue-500 to-cyber-blue-600 text-white border border-cyber-blue-500/50 hover:from-cyber-blue-400 hover:to-cyber-blue-500 transition-all duration-300 font-medium mt-2"
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#03045e] text-white border border-[#03045e] hover:bg-[#03045e]/90 transition-all duration-300 font-medium mt-2"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
