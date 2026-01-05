@@ -411,19 +411,19 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.8 }}
               className="pt-4"
             >
-              <div className="inline-flex items-center space-x-4 px-6 py-3 bg-white border border-[#03045e]/20 rounded-lg shadow-lg">
-                <div className="flex items-center space-x-2">
-                  <span className="text-xs font-semibold text-[#03045e] uppercase tracking-wider">
+              <div className="inline-flex items-center space-x-5 px-7 py-3.5 bg-white border border-[#03045e]/15 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
+                <div className="flex items-center">
+                  <span className="text-xs font-bold text-[#03045e] uppercase tracking-[0.15em] letter-spacing-wide">
                     Certified
                   </span>
                 </div>
-                <div className="h-4 w-px bg-[#03045e]/30" />
-                <div className="flex items-center space-x-3 text-sm">
-                  <span className="text-black">Microsoft</span>
-                  <span className="text-black">•</span>
-                  <span className="text-black">AWS</span>
-                  <span className="text-black">•</span>
-                  <span className="text-black">Databricks</span>
+                <div className="h-5 w-px bg-[#03045e]/20" />
+                <div className="flex items-center space-x-4 text-sm font-medium">
+                  <span className="text-gray-800">Microsoft</span>
+                  <span className="text-gray-400 text-xs">•</span>
+                  <span className="text-gray-800">AWS</span>
+                  <span className="text-gray-400 text-xs">•</span>
+                  <span className="text-gray-800">Databricks</span>
                 </div>
               </div>
             </motion.div>
