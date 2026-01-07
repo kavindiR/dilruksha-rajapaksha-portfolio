@@ -1,7 +1,9 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef, useMemo } from 'react';
-import { personalInfo, education } from '../data/portfolio';
+import { useRef, useMemo, useState, useEffect } from 'react';
+import { personalInfo, education, certifications } from '../data/portfolio';
 import profileImage from '../assets/Dilruksha.png';
+import { MicrosoftLogo, AWSLogo, DatabricksLogo } from './CompanyLogos';
+import TypewriterText from './TypewriterText';
 
 // Professional Data Science Background Animation Component
 function DataScienceBackground() {
@@ -326,11 +328,75 @@ function DataScienceBackground() {
 
 export default function Hero() {
   const ref = useRef(null);
+  const nameRef = useRef<HTMLHeadingElement>(null);
+  const certContainerRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   // Get education data for display
   const mscDegree = education.find(edu => edu.degree.includes('Data Science & Artificial Intelligence'));
   const bscDegree = education.find(edu => edu.degree.includes('Statistics & Operations Research'));
+
+  // Measure certification container width and adjust name font size to match
+  useEffect(() => {
+    const updateFontSize = () => {
+      if (certContainerRef.current && nameRef.current) {
+        const certWidth = certContainerRef.current.offsetWidth;
+        
+        if (certWidth > 0) {
+          // Set width constraint
+          nameRef.current.style.width = `${certWidth}px`;
+          nameRef.current.style.maxWidth = `${certWidth}px`;
+          
+          // Calculate font size to fit the text within the container width
+          // Binary search for the right font size
+          let minSize = 12;
+          let maxSize = 80;
+          let bestSize = 40;
+          
+          // Temporarily hide to measure accurately
+          const originalDisplay = nameRef.current.style.display;
+          nameRef.current.style.display = 'block';
+          nameRef.current.style.visibility = 'hidden';
+          
+          for (let i = 0; i < 15; i++) {
+            const fontSize = (minSize + maxSize) / 2;
+            nameRef.current.style.fontSize = `${fontSize}px`;
+            
+            // Force reflow
+            nameRef.current.offsetHeight;
+            
+            if (nameRef.current.scrollWidth <= certWidth) {
+              bestSize = fontSize;
+              minSize = fontSize;
+            } else {
+              maxSize = fontSize;
+            }
+          }
+          
+          nameRef.current.style.fontSize = `${bestSize}px`;
+          nameRef.current.style.display = originalDisplay;
+          nameRef.current.style.visibility = 'visible';
+        }
+      }
+    };
+
+    // Wait for both elements to render and typewriter to complete
+    const timer1 = setTimeout(() => {
+      updateFontSize();
+    }, 2500); // Wait for typewriter animation
+    
+    const timer2 = setTimeout(() => {
+      updateFontSize();
+    }, 100);
+
+    updateFontSize();
+    window.addEventListener('resize', updateFontSize);
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      window.removeEventListener('resize', updateFontSize);
+    };
+  }, [isInView]);
 
   return (
     <section
@@ -338,7 +404,7 @@ export default function Hero() {
       ref={ref}
       className="min-h-screen flex items-center justify-center relative overflow-hidden bg-white"
     >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 max-w-7xl">
+      <div className="container mx-auto pl-4 sm:pl-6 lg:pl-8 pr-4 sm:pr-6 lg:pr-8 relative z-10 max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center min-h-screen py-12">
           {/* Left Column - Profile Image */}
           <motion.div
@@ -347,7 +413,7 @@ export default function Hero() {
             transition={{ duration: 0.8 }}
             className="flex items-center justify-center lg:justify-start"
           >
-            <div className="relative w-full max-w-2xl lg:max-w-3xl">
+            <div className="relative w-full max-w-2xl lg:max-w-3xl lg:-ml-16 xl:-ml-24">
               <img
                 src={profileImage}
                 alt={personalInfo.name}
@@ -361,19 +427,18 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-black space-y-6 lg:space-y-8"
+            className="text-black lg:-ml-32 xl:-ml-48 2xl:-ml-64"
           >
             {/* Professional Title */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="space-y-2"
+              className="mb-4 lg:mb-5"
             >
-              <p className="text-lg md:text-xl lg:text-2xl font-semibold text-[#03045e] uppercase tracking-wider">
+              <p className="text-lg md:text-xl lg:text-2xl font-semibold text-[#03045e] uppercase tracking-wider leading-tight">
                 Data Engineering Consultant
               </p>
-              <div className="w-24 h-1 bg-[#03045e] rounded-full" />
             </motion.div>
 
             {/* Name */}
@@ -381,9 +446,21 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
+              className="mb-6 lg:mb-7"
             >
-              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tight leading-none text-black">
-                DILRUKSHA RAJAPAKSHA
+              <h1 
+                ref={nameRef}
+                className="font-display font-bold uppercase tracking-tight leading-[1.1] text-black whitespace-nowrap"
+                style={{ fontSize: 'inherit' }}
+              >
+                <TypewriterText
+                  text="DILRUKSHA RAJAPAKSHA"
+                  speed={80}
+                  delay={600}
+                  className="inline-block"
+                  showCursor={true}
+                  cursorColor="#03045e"
+                />
               </h1>
             </motion.div>
 
@@ -392,13 +469,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.5 }}
-              className="space-y-4 pt-2"
+              className="mb-6 lg:mb-7"
             >
-              <p className="text-xl md:text-2xl lg:text-3xl font-semibold leading-tight">
+              <p className="text-xl md:text-2xl lg:text-3xl font-semibold leading-[1.2] mb-4">
                 Transforming Data into
-                <span className="block text-[#03045e]"> Strategic Business Value</span>
+                <span className="block text-[#03045e] mt-1">Strategic Business Value</span>
               </p>
-              <p className="text-base md:text-lg text-black leading-relaxed max-w-2xl">
+              <p className="text-base md:text-lg text-black leading-[1.7] max-w-2xl">
                 6+ years of expertise in architecting scalable data solutions, optimizing data pipelines, 
                 and enabling data-driven decision making across cloud platforms.
               </p>
@@ -409,22 +486,49 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="pt-4"
+              className="mt-6 lg:mt-7"
             >
-              <div className="inline-flex items-center space-x-5 px-7 py-3.5 bg-white border border-[#03045e]/15 rounded-xl shadow-md hover:shadow-lg transition-all duration-300">
-                <div className="flex items-center">
-                  <span className="text-xs font-bold text-[#03045e] uppercase tracking-[0.15em] letter-spacing-wide">
-                    Certified
-                  </span>
-                </div>
-                <div className="h-5 w-px bg-[#03045e]/20" />
-                <div className="flex items-center space-x-4 text-sm font-medium">
-                  <span className="text-gray-800">Microsoft</span>
-                  <span className="text-gray-400 text-xs">•</span>
-                  <span className="text-gray-800">AWS</span>
-                  <span className="text-gray-400 text-xs">•</span>
-                  <span className="text-gray-800">Databricks</span>
-                </div>
+              {/* Certifications Grid */}
+              <div 
+                ref={certContainerRef}
+                className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+              >
+                {certifications.map((cert, index) => {
+                  const logos = [MicrosoftLogo, AWSLogo, DatabricksLogo];
+                  const LogoComponent = logos[index];
+                  return (
+                    <motion.div
+                      key={cert}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : {}}
+                      transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
+                      whileHover={{ scale: 1.02, y: -2 }}
+                      className="group relative bg-white border border-[#03045e]/15 rounded-lg p-4 hover:border-[#03045e]/30 hover:shadow-md transition-all duration-300"
+                    >
+                      {/* Logo and Badge */}
+                      <div className="flex items-start justify-between mb-3">
+                        {LogoComponent && (
+                          <div className="flex-shrink-0 p-2 bg-gradient-to-br from-[#03045e]/5 to-[#03045e]/10 rounded-lg group-hover:from-[#03045e]/10 group-hover:to-[#03045e]/20 transition-all duration-300">
+                            <LogoComponent className="w-6 h-6 text-[#03045e]" />
+                          </div>
+                        )}
+                        <div className="ml-auto">
+                          <span className="inline-flex items-center px-2 py-1 text-[10px] font-semibold text-green-700 uppercase tracking-wider bg-green-50 border border-green-200/50 rounded-md">
+                            Verified
+                          </span>
+                        </div>
+                      </div>
+                      
+                      {/* Certification Text */}
+                      <p className="text-xs font-medium text-black leading-relaxed group-hover:text-[#03045e] transition-colors duration-300">
+                        {cert}
+                      </p>
+                      
+                      {/* Hover Effect Indicator */}
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#03045e] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </motion.div>
+                  );
+                })}
               </div>
             </motion.div>
           </motion.div>

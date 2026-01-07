@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Code, Database, Cloud, BarChart, Award, Briefcase, Cpu, Layers, Palette, Terminal, Zap } from 'lucide-react';
+import { Code, Database, Cloud, Award, Briefcase, Cpu, Layers, Palette, Terminal, Zap } from 'lucide-react';
 import { skills, certifications, personalInfo } from '../data/portfolio';
 
 const highlights = [
@@ -137,14 +137,6 @@ export default function About() {
         >
           {/* Header */}
           <div className="text-center mb-10">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 0.5 }}
-              className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-[#03045e] mb-4"
-            >
-              <BarChart className="text-white" size={32} />
-            </motion.div>
             <h3 className="font-display text-3xl md:text-4xl font-bold text-black mb-2">
               Technical Skills
             </h3>

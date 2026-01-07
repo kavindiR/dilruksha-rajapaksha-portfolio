@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Download } from 'lucide-react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { toggleMenu, closeMenu, selectIsMenuOpen, selectIsScrolled, setScrolled } from '../store/slices/uiSlice';
+import { personalInfo } from '../data/portfolio';
 
 const navItems = [
   { name: 'Home', href: '#home' },
@@ -161,14 +162,15 @@ export default function Header() {
       variants={headerVariants}
       initial="hidden"
       animate="visible"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-white shadow-lg border-b border-[#03045e]/20'
+          ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-gray-200/50'
           : 'bg-transparent'
       }`}
     >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div className="flex items-center justify-between h-16 sm:h-20">
+        <div className="flex items-center justify-between h-16 sm:h-20 lg:h-20">
+          {/* Logo Section */}
           <motion.div
             variants={logoVariants}
             initial="hidden"
@@ -181,20 +183,34 @@ export default function Header() {
                 e.preventDefault();
                 handleNavClick('#home');
               }}
-              className="flex items-center"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-3 group"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               transition={{ type: 'spring', stiffness: 400, damping: 17 }}
             >
-              <img 
-                src="/favicon.svg" 
-                alt="DR Logo" 
-                className="h-8 w-8 sm:h-10 sm:w-10"
-              />
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#03045e] to-[#02033a] rounded-xl blur-md opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                <div className="relative bg-gradient-to-br from-[#03045e] to-[#02033a] rounded-xl px-4 py-2.5 shadow-lg group-hover:shadow-xl transition-all duration-300">
+                  <div className="flex items-center justify-center">
+                    <span className="text-white font-bold text-lg sm:text-xl lg:text-2xl tracking-tight" style={{ letterSpacing: '-2px' }}>
+                      DR
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="hidden sm:block">
+                <div className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-[#03045e] transition-colors duration-300">
+                  {personalInfo.name.split(' ')[0]}
+                </div>
+                <div className="text-xs text-gray-500 font-medium">
+                  {personalInfo.title}
+                </div>
+              </div>
             </motion.a>
           </motion.div>
 
-          <div className="hidden md:flex md:items-center md:space-x-8">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex lg:items-center lg:space-x-1">
             {navItems.map((item, index) => (
               <motion.a
                 key={item.name}
@@ -208,19 +224,20 @@ export default function Header() {
                   e.preventDefault();
                   handleNavClick(item.href);
                 }}
-                className="text-black hover:text-[#03045e] transition-colors duration-300 font-medium relative"
+                className="relative px-4 py-2 text-sm font-semibold text-gray-700 hover:text-[#03045e] transition-colors duration-300 rounded-lg hover:bg-gray-50/80 group"
               >
-                {item.name}
+                <span className="relative z-10">{item.name}</span>
                 <motion.span
-                  className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#03045e]"
-                  whileHover={{ width: '100%' }}
+                  className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-transparent via-[#03045e] to-transparent"
+                  whileHover={{ width: '60%' }}
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 />
               </motion.a>
             ))}
           </div>
 
-          <div className="flex items-center space-x-4">
+          {/* Action Buttons */}
+          <div className="flex items-center gap-3">
             <motion.a
               href="/resume.pdf"
               download
@@ -229,9 +246,9 @@ export default function Header() {
               animate="visible"
               whileHover="hover"
               whileTap="tap"
-              className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg bg-[#03045e] text-white border border-[#03045e] hover:bg-[#03045e]/90 transition-all duration-300 font-medium"
+              className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-lg bg-gradient-to-r from-[#03045e] to-[#023e8a] text-white shadow-lg hover:shadow-xl transition-all duration-300 font-semibold text-sm hover:scale-105 active:scale-95"
             >
-              <Download size={18} />
+              <Download size={16} className="stroke-[2.5]" />
               <span>Download CV</span>
             </motion.a>
 
@@ -242,7 +259,11 @@ export default function Header() {
               whileHover="hover"
               whileTap="tap"
               onClick={() => dispatch(toggleMenu())}
-              className="md:hidden p-2 rounded-lg bg-white text-[#03045e] border border-[#03045e]/20"
+              className={`lg:hidden p-2.5 rounded-lg transition-all duration-300 ${
+                isScrolled
+                  ? 'bg-gray-100 text-[#03045e] hover:bg-gray-200'
+                  : 'bg-white/90 backdrop-blur-sm text-[#03045e] hover:bg-white shadow-md'
+              }`}
             >
               <AnimatePresence mode="wait">
                 {isMenuOpen ? (
@@ -253,7 +274,7 @@ export default function Header() {
                     exit={{ rotate: 90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <X size={24} />
+                    <X size={22} className="stroke-[2.5]" />
                   </motion.div>
                 ) : (
                   <motion.div
@@ -263,7 +284,7 @@ export default function Header() {
                     exit={{ rotate: -90, opacity: 0 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Menu size={24} />
+                    <Menu size={22} className="stroke-[2.5]" />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -271,6 +292,7 @@ export default function Header() {
           </div>
         </div>
 
+        {/* Mobile Menu */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -278,9 +300,9 @@ export default function Header() {
               initial="hidden"
               animate="visible"
               exit="hidden"
-              className="md:hidden pb-4 overflow-hidden"
+              className="lg:hidden overflow-hidden border-t border-gray-200/50"
             >
-              <div className="flex flex-col space-y-3 pt-4">
+              <div className="flex flex-col pt-4 pb-6 space-y-1">
                 {navItems.map((item, index) => (
                   <motion.a
                     key={item.name}
@@ -293,8 +315,8 @@ export default function Header() {
                       e.preventDefault();
                       handleNavClick(item.href);
                     }}
-                    className="text-black hover:text-[#03045e] transition-colors duration-300 font-medium py-2"
-                    whileHover={{ x: 5 }}
+                    className="px-4 py-3 text-base font-semibold text-gray-700 hover:text-[#03045e] hover:bg-gray-50 rounded-lg transition-all duration-300 active:scale-[0.98]"
+                    whileHover={{ x: 4 }}
                     whileTap={{ scale: 0.98 }}
                   >
                     {item.name}
@@ -307,11 +329,11 @@ export default function Header() {
                   initial="hidden"
                   animate="visible"
                   custom={navItems.length}
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#03045e] text-white border border-[#03045e] hover:bg-[#03045e]/90 transition-all duration-300 font-medium mt-2"
+                  className="flex items-center justify-center gap-2 px-4 py-3 mx-4 mt-4 rounded-lg bg-gradient-to-r from-[#03045e] to-[#023e8a] text-white shadow-lg hover:shadow-xl transition-all duration-300 font-semibold"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Download size={18} />
+                  <Download size={18} className="stroke-[2.5]" />
                   <span>Download CV</span>
                 </motion.a>
               </div>

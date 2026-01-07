@@ -51,8 +51,8 @@ const scrollButtonVariants = {
     },
   },
   hover: {
-    scale: 1.1,
-    y: -4,
+    scale: 1.15,
+    y: -6,
     transition: {
       type: 'spring',
       stiffness: 400,
@@ -198,7 +198,7 @@ export default function Footer() {
           viewport={{ once: true }}
           whileHover="hover"
           whileTap="tap"
-          className="relative w-14 h-14 bg-gradient-to-br from-cyber-blue-500 to-cyber-blue-700 rounded-full transition-all duration-300 flex items-center justify-center text-white z-20 border-4 border-white"
+          className="relative w-16 h-16 bg-gradient-to-br from-[#03045e] via-[#023e8a] to-[#0077b6] rounded-full transition-all duration-300 flex items-center justify-center text-white z-20 border-4 border-white shadow-[0_4px_20px_rgba(3,4,94,0.4),0_0_40px_rgba(3,4,94,0.2)] hover:shadow-[0_6px_30px_rgba(3,4,94,0.5),0_0_60px_rgba(3,4,94,0.3)]"
           aria-label="Scroll to top"
         >
           <motion.div
@@ -209,7 +209,7 @@ export default function Footer() {
               ease: 'easeInOut',
             }}
           >
-            <ArrowUp size={24} />
+            <ArrowUp size={28} className="stroke-[3]" />
           </motion.div>
         </motion.button>
       </div>
