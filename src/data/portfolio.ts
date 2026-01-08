@@ -106,9 +106,24 @@ export const skills = {
 
 // Certifications
 export const certifications = [
-  'Microsoft Certified: Azure Data Engineer Associate',
-  'AWS Certified Solutions Architect - Associate',
-  'Databricks Certified Associate Developer for Apache Spark',
+  {
+    name: 'Microsoft Certified: Azure Data Engineer Associate',
+    issuer: 'Microsoft',
+    link: 'https://learn.microsoft.com/en-us/credentials/certifications/azure-data-engineer/',
+    logo: 'microsoft',
+  },
+  {
+    name: 'AWS Certified Solutions Architect - Associate',
+    issuer: 'Amazon Web Services',
+    link: 'https://aws.amazon.com/certification/certified-solutions-architect-associate/',
+    logo: 'aws',
+  },
+  {
+    name: 'Databricks Certified Associate Developer for Apache Spark',
+    issuer: 'Databricks',
+    link: 'https://www.databricks.com/learn/certification/apache-spark-developer-associate',
+    logo: 'databricks',
+  },
 ];
 
 // Professional Experience

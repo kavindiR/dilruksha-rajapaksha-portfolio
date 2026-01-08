@@ -494,22 +494,31 @@ export default function Hero() {
                 className="grid grid-cols-1 sm:grid-cols-3 gap-4"
               >
                 {certifications.map((cert, index) => {
-                  const logos = [MicrosoftLogo, AWSLogo, DatabricksLogo];
-                  const LogoComponent = logos[index];
+                  const logoMap: Record<string, any> = {
+                    'microsoft': MicrosoftLogo,
+                    'aws': AWSLogo,
+                    'databricks': DatabricksLogo,
+                  };
+                  
+                  const LogoComponent = logoMap[cert.logo] || null;
+                  
                   return (
-                    <motion.div
-                      key={cert}
+                    <motion.a
+                      key={cert.name}
+                      href={cert.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       initial={{ opacity: 0, y: 10 }}
                       animate={isInView ? { opacity: 1, y: 0 } : {}}
                       transition={{ duration: 0.5, delay: 0.9 + index * 0.1 }}
                       whileHover={{ scale: 1.02, y: -2 }}
-                      className="group relative bg-white border border-[#03045e]/15 rounded-lg p-4 hover:border-[#03045e]/30 hover:shadow-md transition-all duration-300"
+                      className="group relative bg-white border border-[#03045e]/15 rounded-lg p-4 hover:border-[#03045e]/30 hover:shadow-md transition-all duration-300 block"
                     >
                       {/* Logo and Badge */}
                       <div className="flex items-start justify-between mb-3">
                         {LogoComponent && (
                           <div className="flex-shrink-0 p-2 bg-gradient-to-br from-[#03045e]/5 to-[#03045e]/10 rounded-lg group-hover:from-[#03045e]/10 group-hover:to-[#03045e]/20 transition-all duration-300">
-                            <LogoComponent className="w-6 h-6 text-[#03045e]" />
+                            <LogoComponent className="w-6 h-6" />
                           </div>
                         )}
                         <div className="ml-auto">
@@ -521,12 +530,12 @@ export default function Hero() {
                       
                       {/* Certification Text */}
                       <p className="text-xs font-medium text-black leading-relaxed group-hover:text-[#03045e] transition-colors duration-300">
-                        {cert}
+                        {cert.name}
                       </p>
                       
                       {/* Hover Effect Indicator */}
                       <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-[#03045e] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </motion.div>
+                    </motion.a>
                   );
                 })}
               </div>

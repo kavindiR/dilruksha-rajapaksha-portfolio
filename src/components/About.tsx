@@ -1,13 +1,88 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Code, Database, Cloud, Award, Briefcase, Cpu, Layers, Palette, Terminal, Zap } from 'lucide-react';
+import { useRef, useState, useEffect } from 'react';
+import { Code, Database, Cloud, Award, Briefcase, Cpu, Layers, Palette, Terminal, Zap, ExternalLink } from 'lucide-react';
 import { skills, certifications, personalInfo } from '../data/portfolio';
+import { ApacheSparkLogo, CloudSolutionsLogo, ApacheAirflowLogo, TensorFlowLogo, DatabricksLogo, PerformanceLogo, MicrosoftLogo, AWSLogo } from './CompanyLogos';
+
+// Custom hook for counting animation
+function useCountUp(end: number, start: number = 0, duration: number = 2000, isInView: boolean = false) {
+  const [count, setCount] = useState(start);
+
+  useEffect(() => {
+    if (!isInView) return;
+
+    let startTime: number | null = null;
+    const startValue = start;
+    const endValue = end;
+
+    const animate = (currentTime: number) => {
+      if (startTime === null) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      
+      // Easing function for smooth animation (ease-out)
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentCount = Math.floor(startValue + (endValue - startValue) * easeOutQuart);
+      
+      setCount(currentCount);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        setCount(endValue);
+      }
+    };
+
+    requestAnimationFrame(animate);
+  }, [isInView, end, start, duration]);
+
+  return count;
+}
+
+// Highlight Card Component with counting animation
+function HighlightCard({ 
+  icon: Icon, 
+  value, 
+  suffix, 
+  label, 
+  subtitle, 
+  index, 
+  isInView 
+}: { 
+  icon: any; 
+  value: number; 
+  suffix: string; 
+  label: string; 
+  subtitle: string; 
+  index: number; 
+  isInView: boolean;
+}) {
+  const count = useCountUp(value, 0, 2000, isInView);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      whileHover={{ scale: 1.05, y: -5 }}
+    >
+      <div className="text-center bg-white border border-[#03045e]/20 rounded-xl shadow-lg transition-all duration-300 p-6 border-t-4 border-[#03045e]">
+        <Icon className="w-8 h-8 mx-auto mb-3 text-[#03045e]" />
+        <div className="text-3xl font-bold text-black mb-1">
+          {count}{suffix} {label}
+        </div>
+        <p className="text-sm text-black">
+          {subtitle}
+        </p>
+      </div>
+    </motion.div>
+  );
+}
 
 const highlights = [
-  { icon: Briefcase, label: '6+ Years', subtitle: 'Experience' },
-  { icon: Cloud, label: '20+', subtitle: 'Cloud Projects' },
-  { icon: Database, label: '50+', subtitle: 'Data Pipelines' },
-  { icon: Award, label: '3+', subtitle: 'Certifications' },
+  { icon: Briefcase, value: 6, suffix: '+', label: 'Years', subtitle: 'Experience' },
+  { icon: Cloud, value: 20, suffix: '+', label: '', subtitle: 'Cloud Projects' },
+  { icon: Database, value: 50, suffix: '+', label: '', subtitle: 'Data Pipelines' },
+  { icon: Award, value: 3, suffix: '+', label: '', subtitle: 'Certifications' },
 ];
 
 export default function About() {
@@ -43,23 +118,16 @@ export default function About() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-12">
           {highlights.map((item, index) => (
-            <motion.div
-              key={item.label}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ scale: 1.05, y: -5 }}
-            >
-              <div className="text-center bg-white border border-[#03045e]/20 rounded-xl shadow-lg transition-all duration-300 p-6 border-t-4 border-[#03045e]">
-                <item.icon className="w-8 h-8 mx-auto mb-3 text-[#03045e]" />
-                <div className="text-3xl font-bold text-black mb-1">
-                  {item.label}
-                </div>
-                <p className="text-sm text-black">
-                  {item.subtitle}
-                </p>
-              </div>
-            </motion.div>
+            <HighlightCard
+              key={item.subtitle}
+              icon={item.icon}
+              value={item.value}
+              suffix={item.suffix}
+              label={item.label}
+              subtitle={item.subtitle}
+              index={index}
+              isInView={isInView}
+            />
           ))}
         </div>
 
@@ -70,32 +138,40 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <div className="bg-white border border-[#03045e]/20 rounded-xl shadow-xl transition-all duration-300 p-6 border-t-4 border-[#03045e]">
-              <h3 className="font-display flex items-center text-xl font-bold text-black mb-6">
-                <Code className="mr-3 text-[#03045e]" />
+              <h3 className="font-display text-xl font-bold text-black mb-6">
                 Core Expertise
               </h3>
-              <div className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 {[
-                  'Data Architecture & Engineering',
-                  'Cloud Data Solutions (Azure, GCP, AWS)',
-                  'ETL/ELT Pipeline Development',
-                  'Machine Learning & AI Integration',
-                  'Data Warehousing & Lakehouse',
-                  'Performance Optimization',
-                ].map((expertise, index) => (
-                  <motion.div
-                    key={expertise}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ delay: 0.3 + index * 0.1 }}
-                    className="flex items-center space-x-3"
-                  >
-                    <span className="inline-block w-1.5 h-1.5 bg-[#03045e] rounded-full" />
-                    <span className="text-black">
-                      {expertise}
-                    </span>
-                  </motion.div>
-                ))}
+                  { name: 'Data Architecture & Engineering', Logo: ApacheSparkLogo },
+                  { name: 'Cloud Data Solutions (Azure, GCP, AWS)', Logo: CloudSolutionsLogo },
+                  { name: 'ETL/ELT Pipeline Development', Logo: ApacheAirflowLogo },
+                  { name: 'Machine Learning & AI Integration', Logo: TensorFlowLogo },
+                  { name: 'Data Warehousing & Lakehouse', Logo: DatabricksLogo },
+                  { name: 'Performance Optimization', Logo: PerformanceLogo },
+                ].map((expertise, index) => {
+                  const LogoComponent = expertise.Logo;
+                  return (
+                    <motion.div
+                      key={expertise.name}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                      transition={{ delay: 0.3 + index * 0.08 }}
+                      whileHover={{ scale: 1.02, y: -2 }}
+                    >
+                      <div className="bg-gradient-to-br from-white to-[#03045e]/5 border border-[#03045e]/20 rounded-lg p-4 hover:border-[#03045e]/40 hover:shadow-md transition-all duration-300 group">
+                        <div className="flex items-start space-x-3">
+                          <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-white group-hover:bg-[#03045e]/5 flex items-center justify-center transition-all duration-300 p-1.5">
+                            <LogoComponent className="w-full h-full" />
+                          </div>
+                          <span className="text-black text-sm font-medium leading-relaxed pt-2">
+                            {expertise.name}
+                          </span>
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                })}
               </div>
             </div>
           </motion.div>
@@ -110,21 +186,51 @@ export default function About() {
                 <Award className="mr-3 text-[#03045e]" />
                 Certifications
               </h3>
-              <div className="space-y-4">
-                {certifications.map((cert, index) => (
-                  <motion.div
-                    key={cert}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={isInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ delay: 0.3 + index * 0.1 }}
-                  >
-                    <div className="bg-white border border-[#03045e]/20 rounded-lg p-4 hover:border-[#03045e]/40 transition-colors">
-                      <p className="text-sm text-black">
-                        {cert}
-                      </p>
-                    </div>
-                  </motion.div>
-                ))}
+              <div className="space-y-3">
+                {certifications.map((cert, index) => {
+                  // Map logo names to components
+                  const logoMap: Record<string, React.ComponentType<{ className?: string }>> = {
+                    'microsoft': MicrosoftLogo,
+                    'aws': AWSLogo,
+                    'databricks': DatabricksLogo,
+                  };
+                  
+                  const LogoComponent = logoMap[cert.logo] || Award;
+                  
+                  return (
+                    <motion.a
+                      key={cert.name}
+                      href={cert.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : {}}
+                      transition={{ delay: 0.3 + index * 0.1 }}
+                      whileHover={{ scale: 1.02, y: -2 }}
+                      className="block"
+                    >
+                      <div className="bg-gradient-to-br from-white to-[#03045e]/5 border border-[#03045e]/20 rounded-lg p-4 hover:border-[#03045e]/40 hover:shadow-md transition-all duration-300 group">
+                        <div className="flex items-start space-x-4">
+                          <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-white border border-[#03045e]/10 group-hover:border-[#03045e]/20 flex items-center justify-center transition-all duration-300 p-2 shadow-sm">
+                            <LogoComponent className="w-full h-full" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-semibold text-black mb-1 group-hover:text-[#03045e] transition-colors">
+                              {cert.name}
+                            </p>
+                            <p className="text-xs text-black/60 mb-2">
+                              {cert.issuer}
+                            </p>
+                            <div className="flex items-center text-xs text-[#03045e] font-medium">
+                              View Credential
+                              <ExternalLink className="w-3 h-3 ml-1.5 group-hover:translate-x-0.5 transition-transform" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.a>
+                  );
+                })}
               </div>
             </div>
           </motion.div>
